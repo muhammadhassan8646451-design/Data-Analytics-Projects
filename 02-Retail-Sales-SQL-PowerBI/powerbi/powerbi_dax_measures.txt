@@ -1,0 +1,70 @@
+
+POWER BI SETUP
+==============
+
+Recommended table name:
+Superstore
+
+1) Create a Date table:
+
+DateTable =
+CALENDAR(
+    MIN(Superstore[order_date]),
+    MAX(Superstore[order_date])
+)
+
+Year = YEAR(DateTable[Date])
+Month Number = MONTH(DateTable[Date])
+Month = FORMAT(DateTable[Date], "MMMM")
+Year Month = FORMAT(DateTable[Date], "YYYY-MM")
+
+Create a relationship:
+DateTable[Date] -> Superstore[order_date]
+
+CORE MEASURES
+=============
+
+Total Sales =
+SUM(Superstore[sales])
+
+Total Profit =
+SUM(Superstore[profit])
+
+Total Orders =
+DISTINCTCOUNT(Superstore[order_id])
+
+Total Customers =
+DISTINCTCOUNT(Superstore[customer_id])
+
+Total Quantity =
+SUM(Superstore[quantity])
+
+Profit Margin % =
+DIVIDE(
+    [Total Profit],
+    [Total Sales],
+    0
+)
+
+Average Order Value =
+DIVIDE(
+    [Total Sales],
+    [Total Orders],
+    0
+)
+
+Average Discount % =
+AVERAGE(Superstore[discount])
+
+Sales Previous Month =
+CALCULATE(
+    [Total Sales],
+    DATEADD(DateTable[Date], -1, MONTH)
+)
+
+Month-over-Month Growth % =
+DIVIDE(
+    [Total Sales] - [Sales Previous Month],
+    [Sales Previous Month],
+    0
+)
