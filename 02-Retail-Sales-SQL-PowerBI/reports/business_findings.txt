@@ -1,0 +1,26 @@
+
+RETAIL SALES & CUSTOMER ANALYTICS — KEY FINDINGS
+================================================
+
+Total Sales: $2,296,919.49
+Total Profit: $286,409.08
+Profit Margin: 12.47%
+Unique Orders: 5,009
+Unique Customers: 793
+Average Order Value: $458.56
+
+Best Region by Sales: West
+Best Customer Segment by Sales: Consumer
+Top Product by Sales: Canon imageCLASS 2200 Advanced Copier
+Weakest Discount Band by Profit Margin: Above 50%
+
+BUSINESS RECOMMENDATIONS
+========================
+
+1. Protect high-performing products and categories by monitoring stock availability and demand.
+2. Review loss-making products with high sales to identify pricing, discounting or cost problems.
+3. Focus customer-retention activity on high-value and repeat customers.
+4. Use regional profitability, not sales alone, when allocating marketing and sales resources.
+5. Review aggressive discount bands that produce weak or negative profit margins.
+6. Monitor month-over-month growth and investigate unusual declines quickly.
+7. Use the Power BI dashboard as an ongoing management tool rather than a one-time report.
