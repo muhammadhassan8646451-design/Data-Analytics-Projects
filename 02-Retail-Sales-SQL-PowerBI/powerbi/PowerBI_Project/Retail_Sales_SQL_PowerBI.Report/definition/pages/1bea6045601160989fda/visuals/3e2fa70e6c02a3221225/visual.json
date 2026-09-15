@@ -1,0 +1,70 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "3e2fa70e6c02a3221225",
+  "position": {
+    "x": 30,
+    "y": 205,
+    "z": 2000,
+    "height": 220,
+    "width": 590,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "superstore_powerbi"
+                    }
+                  },
+                  "Property": "discount_band"
+                }
+              },
+              "queryRef": "superstore_powerbi.discount_band",
+              "nativeQueryRef": "discount_band",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "superstore_powerbi"
+                    }
+                  },
+                  "Property": "Total Sales"
+                }
+              },
+              "queryRef": "superstore_powerbi.Total Sales",
+              "nativeQueryRef": "Total Sales"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "superstore_powerbi"
+                    }
+                  },
+                  "Property": "Total Profit"
+                }
+              },
+              "queryRef": "superstore_powerbi.Total Profit",
+              "nativeQueryRef": "Total Profit"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

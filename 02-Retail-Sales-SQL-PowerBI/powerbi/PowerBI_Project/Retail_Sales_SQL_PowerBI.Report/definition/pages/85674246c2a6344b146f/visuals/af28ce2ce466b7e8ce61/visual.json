@@ -1,0 +1,70 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "af28ce2ce466b7e8ce61",
+  "position": {
+    "x": 30,
+    "y": 215,
+    "z": 2000,
+    "height": 455,
+    "width": 590,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "superstore_powerbi"
+                    }
+                  },
+                  "Property": "order_month"
+                }
+              },
+              "queryRef": "superstore_powerbi.order_month",
+              "nativeQueryRef": "order_month",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "superstore_powerbi"
+                    }
+                  },
+                  "Property": "Total Sales"
+                }
+              },
+              "queryRef": "superstore_powerbi.Total Sales",
+              "nativeQueryRef": "Total Sales"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "superstore_powerbi"
+                    }
+                  },
+                  "Property": "Total Profit"
+                }
+              },
+              "queryRef": "superstore_powerbi.Total Profit",
+              "nativeQueryRef": "Total Profit"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
