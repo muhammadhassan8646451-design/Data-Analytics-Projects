@@ -1,74 +1,149 @@
 # Data Analytics & Data Science Portfolio
 
-A collection of real-world data analytics and data science projects using Python, SQL, Power BI, machine learning, and data visualisation.
+![Python](https://img.shields.io/badge/Python-Data%20Analytics-blue)
+![SQL](https://img.shields.io/badge/SQL-Analytics-orange)
+![Power BI](https://img.shields.io/badge/Power%20BI-Dashboards-yellow)
+![Machine Learning](https://img.shields.io/badge/Machine%20Learning-scikit--learn-purple)
+![Time Series](https://img.shields.io/badge/Time%20Series-Forecasting-darkgreen)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-This repository documents my practical work in data analysis, customer analytics, business intelligence, and machine learning.
+A growing portfolio of end-to-end data analytics, machine learning, SQL and Power BI projects.
 
----
+The repository focuses on practical workflows: data cleaning, exploratory analysis, feature engineering, SQL, machine learning, forecasting, dashboarding and business interpretation.
 
 ## Projects
 
-### 01. E-Commerce Customer & Sales Analysis
+### 1. E-Commerce Customer & Sales Analysis
+**Python | Pandas | RFM | K-Means | Customer Segmentation**
 
-An end-to-end analysis of more than 500,000 UK online retail transactions.
+Analysis of a large UK online retail dataset with more than 500,000 transaction records.
 
-The project includes:
-
-- Data cleaning
-- Exploratory Data Analysis
-- Feature engineering
-- Sales analysis
-- Customer analysis
-- RFM analysis
+**Highlights**
+- Data cleaning and transaction validation
+- Revenue and sales analysis
+- Product, country and customer performance
+- Monthly revenue trends
+- RFM customer analysis
 - K-Means customer segmentation
-- Data visualisation
 - Business recommendations
 
-**Technologies:** Python, Pandas, NumPy, Matplotlib, Scikit-learn
-
-➡️ [View Project](01-Ecommerce-Customer-Sales-Analysis)
+[View Project 1](./01-Ecommerce-Customer-Sales-Analysis/)
 
 ---
 
-## Skills
+### 2. Retail Sales SQL & Power BI
+**SQL | Python | Power BI | DAX | Business Intelligence**
 
-- Python
-- Pandas
-- NumPy
-- SQL
-- Power BI
-- Data Cleaning
-- Exploratory Data Analysis
-- Data Visualisation
-- Machine Learning
-- Customer Analytics
-- RFM Analysis
-- K-Means Clustering
+End-to-end retail sales analysis using the Sample Superstore dataset.
+
+**Highlights**
+- SQL database analysis
+- Sales and profit KPIs
+- Product, regional and customer analysis
+- Discount and profitability analysis
+- Four-page Power BI dashboard
+- Power BI source-controlled project
+
+[View Project 2](./02-Retail-Sales-SQL-PowerBI/)
+
+---
+
+### 3. Customer Churn Prediction & Retention Analytics
+**Python | Machine Learning | scikit-learn | Power BI**
+
+Machine-learning project using the IBM Telco Customer Churn dataset.
+
+**Highlights**
+- 7,043 customer records analysed
+- Churn rate: 26.54%
+- Logistic Regression, Decision Tree, Random Forest and Gradient Boosting
+- Gradient Boosting test ROC-AUC: approximately 0.837
+- Customer churn probability scoring
+- Low, Medium and High risk segmentation
+- Retention-focused Power BI dashboard
+- Model-governance discussion around recall and false negatives
+
+[View Project 3](./03-Customer-Churn-ML-PowerBI/)
 
 ---
 
-## Repository Roadmap
+### 4. Stock Market Analytics & Time Series Forecasting
+**Python | SQL | Financial Analytics | ARIMA | Power BI**
 
-More projects will be added covering:
+Historical analysis of AAPL, MSFT, NVDA, AMZN, GOOGL, META and SPY from 2020 to 2025.
 
-- SQL Analytics
-- Power BI Dashboards
-- Machine Learning
-- Predictive Analytics
-- Customer Churn
-- Sales Forecasting
-- UK Open Data
+**Highlights**
+- Daily and cumulative returns
+- Annualised return and volatility
+- Maximum drawdown
+- Moving averages and rolling volatility
+- Return correlation analysis
+- SQLite and MySQL-ready SQL
+- Naive baseline vs ARIMA forecasting
+- Chronological forecast evaluation
+- Four-page Power BI dashboard
+
+[View Project 4](./04-Stock-Market-Analytics-Forecasting/)
 
 ---
+
+## Technical Skills Demonstrated
+
+- **Python:** Pandas, NumPy, Matplotlib, scikit-learn, statsmodels, yfinance
+- **SQL:** SQLite, MySQL-ready scripts, aggregations, CTEs and window functions
+- **Power BI:** DAX, KPI cards, interactive dashboards and PBIP source projects
+- **Machine Learning:** classification, clustering, model comparison and evaluation
+- **Time Series:** chronological train/test splits, baseline forecasting and ARIMA
+- **Analytics:** EDA, customer analytics, sales analytics, financial analytics and business interpretation
+- **Git & GitHub:** structured repositories, documentation, releases, issues and open-source project organisation
+
+## Repository Structure
+
+```text
+Data-Analytics-Projects/
+├── 01-Ecommerce-Customer-Sales-Analysis/
+├── 02-Retail-Sales-SQL-PowerBI/
+├── 03-Customer-Churn-ML-PowerBI/
+├── 04-Stock-Market-Analytics-Forecasting/
+├── .github/
+├── CONTRIBUTING.md
+├── CODE_OF_CONDUCT.md
+├── LICENSE
+└── README.md
+```
+
+## Portfolio Approach
+
+Each project is designed to demonstrate a complete analytical workflow rather than isolated code snippets.
+
+Typical workflow:
+
+```text
+Raw Data
+   ↓
+Cleaning & Validation
+   ↓
+Exploratory Analysis
+   ↓
+Feature Engineering
+   ↓
+SQL / Statistical / ML Analysis
+   ↓
+Model Evaluation
+   ↓
+Power BI Dashboard
+   ↓
+Business Conclusions
+   ↓
+GitHub Documentation
+```
 
 ## Author
 
 **Muhammad Hassan**
 
-Data Analyst | Python | SQL | Power BI | Machine Learning | Open Source
+Data Analyst | Python | SQL | Power BI | Machine Learning
 
----
+## License
 
-## Open Source
-
-Feedback, issues, and contributions are welcome.
+This repository is licensed under the MIT License.
