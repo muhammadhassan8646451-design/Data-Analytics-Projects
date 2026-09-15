@@ -1,6 +1,6 @@
 table forecast_model_comparison
 
-	measure RMSE = MAX(forecast_model_comparison[RMSE])
+	measure 'Model RMSE' = MAX(forecast_model_comparison[RMSE])
 		formatString: $#,0.00
 
 	measure 'MAPE %' = DIVIDE(MAX(forecast_model_comparison[MAPE_Pct]), 100)

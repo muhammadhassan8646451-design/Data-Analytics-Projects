@@ -42,11 +42,11 @@
                       "Entity": "forecast_model_comparison"
                     }
                   },
-                  "Property": "RMSE"
+                  "Property": "Model RMSE"
                 }
               },
-              "queryRef": "forecast_model_comparison.RMSE",
-              "nativeQueryRef": "RMSE"
+              "queryRef": "forecast_model_comparison.Model RMSE",
+              "nativeQueryRef": "Model RMSE"
             }
           ]
         }
