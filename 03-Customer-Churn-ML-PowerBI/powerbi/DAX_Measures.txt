@@ -1,0 +1,49 @@
+POWER BI DAX MEASURES
+======================
+
+Table: churn_powerbi
+
+Total Customers =
+DISTINCTCOUNT(churn_powerbi[customerID])
+
+Churned Customers =
+SUM(churn_powerbi[ChurnFlag])
+
+Retained Customers =
+[Total Customers] - [Churned Customers]
+
+Churn Rate % =
+DIVIDE([Churned Customers], [Total Customers], 0)
+
+High Risk Customers =
+CALCULATE([Total Customers], churn_powerbi[RiskBand] = "High Risk")
+
+Medium Risk Customers =
+CALCULATE([Total Customers], churn_powerbi[RiskBand] = "Medium Risk")
+
+Low Risk Customers =
+CALCULATE([Total Customers], churn_powerbi[RiskBand] = "Low Risk")
+
+Monthly Charges At Risk =
+SUM(churn_powerbi[MonthlyChargesAtRisk])
+
+Average Churn Probability =
+AVERAGE(churn_powerbi[ChurnProbability])
+
+Average Monthly Charges =
+AVERAGE(churn_powerbi[MonthlyCharges])
+
+Total Monthly Charges =
+SUM(churn_powerbi[MonthlyCharges])
+
+Average Tenure =
+AVERAGE(churn_powerbi[tenure])
+
+FORMATTING
+==========
+Churn Rate %: Percentage, 2 decimals
+Average Churn Probability: Percentage, 2 decimals
+Monthly Charges At Risk: Currency ($), 2 decimals
+Average Monthly Charges: Currency ($), 2 decimals
+Total Monthly Charges: Currency ($), 2 decimals
+Average Tenure: 1 decimal

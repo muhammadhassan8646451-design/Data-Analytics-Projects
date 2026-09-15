@@ -1,0 +1,79 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "d328a6bf77444a5ec40c",
+  "position": {
+    "x": 30,
+    "y": 30,
+    "z": 1000,
+    "height": 145,
+    "width": 1220,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "churn_powerbi"
+                    }
+                  },
+                  "Property": "Churn Rate %"
+                }
+              },
+              "queryRef": "churn_powerbi.Churn Rate %",
+              "nativeQueryRef": "Churn Rate %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "churn_powerbi"
+                    }
+                  },
+                  "Property": "Average Churn Probability"
+                }
+              },
+              "queryRef": "churn_powerbi.Average Churn Probability",
+              "nativeQueryRef": "Average Churn Probability"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "churn_powerbi"
+                    }
+                  },
+                  "Property": "High Risk Customers"
+                }
+              },
+              "queryRef": "churn_powerbi.High Risk Customers",
+              "nativeQueryRef": "High Risk Customers"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "churn_powerbi"
+                    }
+                  },
+                  "Property": "Monthly Charges At Risk"
+                }
+              },
+              "queryRef": "churn_powerbi.Monthly Charges At Risk",
+              "nativeQueryRef": "Monthly Charges At Risk"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

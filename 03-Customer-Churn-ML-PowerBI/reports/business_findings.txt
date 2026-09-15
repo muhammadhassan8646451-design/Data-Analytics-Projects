@@ -1,0 +1,33 @@
+
+CUSTOMER CHURN & RETENTION ANALYTICS — BUSINESS FINDINGS
+========================================================
+
+Dataset size: 7,043 customers
+Overall churn rate: 26.54%
+Selected model: Gradient Boosting
+Test ROC-AUC: 0.845
+High-risk customers: 905
+Monthly charges represented by high-risk customers: $72,337.30
+
+Key observed churn patterns
+---------------------------
+Highest-churn contract type: Month-to-month
+Highest-churn payment method: Electronic check
+Highest-churn internet service group: Fiber optic
+Highest-churn tenure group: 0-12 Months
+
+Retention recommendations
+-------------------------
+1. Prioritise high-risk customers for proactive retention outreach.
+2. Review incentives that encourage movement away from the highest-churn contract type (Month-to-month).
+3. Investigate the customer experience associated with the highest-churn payment method (Electronic check).
+4. Review service quality, pricing and support for the highest-churn internet-service group (Fiber optic).
+5. Create onboarding and early-life retention campaigns for the highest-churn tenure group (0-12 Months).
+6. Offer targeted Tech Support / Online Security bundles where churn risk is elevated.
+7. Use churn probability and customer value together when prioritising retention spend.
+
+Model note
+----------
+The best model was selected by ROC-AUC on a held-out test set. Probability thresholds and
+risk-band cutoffs should be tuned to business campaign capacity, intervention cost and the
+financial value of retaining a customer.

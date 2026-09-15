@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "45451354959c4922ed5f",
+  "position": {
+    "x": 30,
+    "y": 455,
+    "z": 4000,
+    "height": 220,
+    "width": 590,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "churn_powerbi"
+                    }
+                  },
+                  "Property": "TechSupport"
+                }
+              },
+              "queryRef": "churn_powerbi.TechSupport",
+              "nativeQueryRef": "TechSupport",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "churn_powerbi"
+                    }
+                  },
+                  "Property": "High Risk Customers"
+                }
+              },
+              "queryRef": "churn_powerbi.High Risk Customers",
+              "nativeQueryRef": "High Risk Customers"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

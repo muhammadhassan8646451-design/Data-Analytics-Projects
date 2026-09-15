@@ -1,0 +1,247 @@
+table churn_powerbi
+
+	measure 'Total Customers' = DISTINCTCOUNT(churn_powerbi[customerID])
+		formatString: #,0
+
+	measure 'Churned Customers' = SUM(churn_powerbi[ChurnFlag])
+		formatString: #,0
+
+	measure 'Retained Customers' = [Total Customers] - [Churned Customers]
+		formatString: #,0
+
+	measure 'Churn Rate %' = DIVIDE([Churned Customers], [Total Customers], 0)
+		formatString: 0.00%
+
+	measure 'High Risk Customers' = CALCULATE([Total Customers], churn_powerbi[RiskBand] = "High Risk")
+		formatString: #,0
+
+	measure 'Medium Risk Customers' = CALCULATE([Total Customers], churn_powerbi[RiskBand] = "Medium Risk")
+		formatString: #,0
+
+	measure 'Low Risk Customers' = CALCULATE([Total Customers], churn_powerbi[RiskBand] = "Low Risk")
+		formatString: #,0
+
+	measure 'Monthly Charges At Risk' = SUM(churn_powerbi[MonthlyChargesAtRisk])
+		formatString: $#,0.00
+
+	measure 'Average Churn Probability' = AVERAGE(churn_powerbi[ChurnProbability])
+		formatString: 0.00%
+
+	measure 'Average Monthly Charges' = AVERAGE(churn_powerbi[MonthlyCharges])
+		formatString: $#,0.00
+
+	measure 'Total Monthly Charges' = SUM(churn_powerbi[MonthlyCharges])
+		formatString: $#,0.00
+
+	measure 'Average Tenure' = AVERAGE(churn_powerbi[tenure])
+		formatString: 0.0
+
+	column customerID
+		dataType: string
+		sourceColumn: customerID
+		summarizeBy: none
+
+	column gender
+		dataType: string
+		sourceColumn: gender
+		summarizeBy: none
+
+	column SeniorCitizen
+		dataType: int64
+		formatString: 0
+		sourceColumn: SeniorCitizen
+		summarizeBy: sum
+
+	column Partner
+		dataType: string
+		sourceColumn: Partner
+		summarizeBy: none
+
+	column Dependents
+		dataType: string
+		sourceColumn: Dependents
+		summarizeBy: none
+
+	column tenure
+		dataType: int64
+		formatString: 0
+		sourceColumn: tenure
+		summarizeBy: sum
+
+	column PhoneService
+		dataType: string
+		sourceColumn: PhoneService
+		summarizeBy: none
+
+	column MultipleLines
+		dataType: string
+		sourceColumn: MultipleLines
+		summarizeBy: none
+
+	column InternetService
+		dataType: string
+		sourceColumn: InternetService
+		summarizeBy: none
+
+	column OnlineSecurity
+		dataType: string
+		sourceColumn: OnlineSecurity
+		summarizeBy: none
+
+	column OnlineBackup
+		dataType: string
+		sourceColumn: OnlineBackup
+		summarizeBy: none
+
+	column DeviceProtection
+		dataType: string
+		sourceColumn: DeviceProtection
+		summarizeBy: none
+
+	column TechSupport
+		dataType: string
+		sourceColumn: TechSupport
+		summarizeBy: none
+
+	column StreamingTV
+		dataType: string
+		sourceColumn: StreamingTV
+		summarizeBy: none
+
+	column StreamingMovies
+		dataType: string
+		sourceColumn: StreamingMovies
+		summarizeBy: none
+
+	column Contract
+		dataType: string
+		sourceColumn: Contract
+		summarizeBy: none
+
+	column PaperlessBilling
+		dataType: string
+		sourceColumn: PaperlessBilling
+		summarizeBy: none
+
+	column PaymentMethod
+		dataType: string
+		sourceColumn: PaymentMethod
+		summarizeBy: none
+
+	column MonthlyCharges
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: MonthlyCharges
+		summarizeBy: sum
+
+	column TotalCharges
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: TotalCharges
+		summarizeBy: sum
+
+	column Churn
+		dataType: string
+		sourceColumn: Churn
+		summarizeBy: none
+
+	column ChurnFlag
+		dataType: int64
+		formatString: 0
+		sourceColumn: ChurnFlag
+		summarizeBy: sum
+
+	column TenureGroup
+		dataType: string
+		sourceColumn: TenureGroup
+		summarizeBy: none
+
+	column MonthlyChargeBand
+		dataType: string
+		sourceColumn: MonthlyChargeBand
+		summarizeBy: none
+
+	column ServiceCount
+		dataType: int64
+		formatString: 0
+		sourceColumn: ServiceCount
+		summarizeBy: sum
+
+	column ContractRisk
+		dataType: string
+		sourceColumn: ContractRisk
+		summarizeBy: none
+
+	column EstimatedCustomerValue
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: EstimatedCustomerValue
+		summarizeBy: sum
+
+	column ChurnProbability
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: ChurnProbability
+		summarizeBy: sum
+
+	column PredictedChurn
+		dataType: string
+		sourceColumn: PredictedChurn
+		summarizeBy: none
+
+	column RiskBand
+		dataType: string
+		sourceColumn: RiskBand
+		summarizeBy: none
+
+	column MonthlyChargesAtRisk
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: MonthlyChargesAtRisk
+		summarizeBy: sum
+
+	partition churn_powerbi = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/muhammadhassan8646451-design/Data-Analytics-Projects/main/03-Customer-Churn-ML-PowerBI/powerbi/churn_powerbi.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(
+						Headers,
+						{
+							{"customerID", type text},
+							{"gender", type text},
+							{"SeniorCitizen", Int64.Type},
+							{"Partner", type text},
+							{"Dependents", type text},
+							{"tenure", Int64.Type},
+							{"PhoneService", type text},
+							{"MultipleLines", type text},
+							{"InternetService", type text},
+							{"OnlineSecurity", type text},
+							{"OnlineBackup", type text},
+							{"DeviceProtection", type text},
+							{"TechSupport", type text},
+							{"StreamingTV", type text},
+							{"StreamingMovies", type text},
+							{"Contract", type text},
+							{"PaperlessBilling", type text},
+							{"PaymentMethod", type text},
+							{"MonthlyCharges", type number},
+							{"TotalCharges", type number},
+							{"Churn", type text},
+							{"ChurnFlag", Int64.Type},
+							{"TenureGroup", type text},
+							{"MonthlyChargeBand", type text},
+							{"ServiceCount", Int64.Type},
+							{"ContractRisk", type text},
+							{"EstimatedCustomerValue", type number},
+							{"ChurnProbability", type number},
+							{"PredictedChurn", type text},
+							{"RiskBand", type text},
+							{"MonthlyChargesAtRisk", type number}
+						},
+						"en-US"
+					)
+				in
+					Typed
