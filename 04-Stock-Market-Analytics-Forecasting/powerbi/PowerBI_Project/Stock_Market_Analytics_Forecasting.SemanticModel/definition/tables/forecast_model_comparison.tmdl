@@ -1,0 +1,61 @@
+table forecast_model_comparison
+
+	measure RMSE = MAX(forecast_model_comparison[RMSE])
+		formatString: $#,0.00
+
+	measure 'MAPE %' = DIVIDE(MAX(forecast_model_comparison[MAPE_Pct]), 100)
+		formatString: 0.00%
+
+	measure 'Naive RMSE' = CALCULATE(MAX(forecast_model_comparison[RMSE]), forecast_model_comparison[Model] = "Naive Previous Close")
+		formatString: $#,0.00
+
+	measure 'ARIMA RMSE' = CALCULATE(MAX(forecast_model_comparison[RMSE]), forecast_model_comparison[Model] = "ARIMA(5,1,0)")
+		formatString: $#,0.00
+
+	measure 'Naive MAPE %' = DIVIDE(CALCULATE(MAX(forecast_model_comparison[MAPE_Pct]), forecast_model_comparison[Model] = "Naive Previous Close"), 100)
+		formatString: 0.00%
+
+	measure 'ARIMA MAPE %' = DIVIDE(CALCULATE(MAX(forecast_model_comparison[MAPE_Pct]), forecast_model_comparison[Model] = "ARIMA(5,1,0)"), 100)
+		formatString: 0.00%
+
+	column Model
+		dataType: string
+		sourceColumn: Model
+		summarizeBy: none
+
+	column MAE
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: MAE
+		summarizeBy: none
+
+	column RMSE
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: RMSE
+		summarizeBy: none
+
+	column MAPE_Pct
+		dataType: double
+		formatString: 0.00
+		sourceColumn: MAPE_Pct
+		summarizeBy: none
+
+	partition forecast_model_comparison = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/muhammadhassan8646451-design/Data-Analytics-Projects/main/04-Stock-Market-Analytics-Forecasting/reports/forecast_model_comparison.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(
+						Headers,
+						{
+							{"Model", type text},
+							{"MAE", type number},
+							{"RMSE", type number},
+							{"MAPE_Pct", type number}
+						},
+						"en-US"
+					)
+				in
+					Typed

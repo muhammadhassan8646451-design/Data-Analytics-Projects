@@ -1,0 +1,79 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "4dff26113b3ca7e98a36",
+  "position": {
+    "x": 30,
+    "y": 30,
+    "z": 1000,
+    "height": 145,
+    "width": 1220,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_kpi_summary"
+                    }
+                  },
+                  "Property": "SPY Total Return"
+                }
+              },
+              "queryRef": "market_kpi_summary.SPY Total Return",
+              "nativeQueryRef": "SPY Total Return"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_kpi_summary"
+                    }
+                  },
+                  "Property": "Average Total Return"
+                }
+              },
+              "queryRef": "market_kpi_summary.Average Total Return",
+              "nativeQueryRef": "Average Total Return"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_kpi_summary"
+                    }
+                  },
+                  "Property": "Average Annualised Volatility"
+                }
+              },
+              "queryRef": "market_kpi_summary.Average Annualised Volatility",
+              "nativeQueryRef": "Average Annualised Volatility"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_powerbi"
+                    }
+                  },
+                  "Property": "Total Securities"
+                }
+              },
+              "queryRef": "market_powerbi.Total Securities",
+              "nativeQueryRef": "Total Securities"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

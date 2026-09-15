@@ -1,0 +1,54 @@
+
+STOCK MARKET ANALYTICS & FORECASTING — BUSINESS FINDINGS
+========================================================
+
+Historical period:
+2020-01-01 to 2025-12-31
+
+Securities:
+AAPL, MSFT, NVDA, AMZN, GOOGL, META, SPY
+
+Historical market analytics
+---------------------------
+Highest total return:
+NVDA — 3023.39%
+
+Highest annualised volatility:
+NVDA — 53.18%
+
+Deepest maximum drawdown:
+META — -76.74%
+
+Highest Sharpe-style ratio using 0% risk-free-rate assumption:
+NVDA — 1.46
+
+Forecasting
+-----------
+Primary ticker:
+SPY
+
+Test period:
+Last 60 historical trading observations.
+
+Best forecasting model by test RMSE:
+Naive Previous Close
+
+Model comparison:
+               Model      MAE      RMSE  MAPE_Pct
+Naive Previous Close 4.163422  5.406926  0.624174
+        ARIMA(5,1,0) 9.386663 11.093583  1.393379
+
+Interpretation
+--------------
+1. Historical returns vary materially across securities.
+2. Higher return is not automatically better because volatility and drawdown differ.
+3. Cross-security correlation should be evaluated using returns rather than raw prices.
+4. Rolling volatility changes over time and can rise sharply during stressed periods.
+5. A naive forecast is a strong baseline for short-horizon asset-price forecasting.
+6. Forecast accuracy should be judged out-of-sample using chronological data.
+7. Forecasts are model outputs, not guarantees or investment recommendations.
+
+Important disclaimer
+--------------------
+This project is educational analytics only and does not provide financial advice.
+Historical performance and statistical forecasts do not guarantee future results.

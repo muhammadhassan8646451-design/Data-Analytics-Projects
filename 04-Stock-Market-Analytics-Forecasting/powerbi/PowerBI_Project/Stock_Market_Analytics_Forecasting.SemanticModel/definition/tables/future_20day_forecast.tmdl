@@ -1,0 +1,45 @@
+table future_20day_forecast
+
+	measure 'Future ARIMA Forecast' = MAX(future_20day_forecast[ForecastAdjClose])
+		formatString: $#,0.00
+
+	column Date
+		dataType: dateTime
+		formatString: Short Date
+		sourceColumn: Date
+		summarizeBy: none
+
+	column Ticker
+		dataType: string
+		sourceColumn: Ticker
+		summarizeBy: none
+
+	column ForecastAdjClose
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: ForecastAdjClose
+		summarizeBy: none
+
+	column ForecastType
+		dataType: string
+		sourceColumn: ForecastType
+		summarizeBy: none
+
+	partition future_20day_forecast = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/muhammadhassan8646451-design/Data-Analytics-Projects/main/04-Stock-Market-Analytics-Forecasting/powerbi/future_20day_forecast.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(
+						Headers,
+						{
+							{"Date", type date},
+							{"Ticker", type text},
+							{"ForecastAdjClose", type number},
+							{"ForecastType", type text}
+						},
+						"en-US"
+					)
+				in
+					Typed

@@ -1,0 +1,137 @@
+POWER BI DAX MEASURES
+======================
+
+TABLE: market_powerbi
+
+Trading Records =
+COUNTROWS(market_powerbi)
+
+Total Securities =
+DISTINCTCOUNT(market_powerbi[Ticker])
+
+SPY Latest Historical Price =
+CALCULATE(
+    MAX(market_powerbi[Adj Close]),
+    market_powerbi[Ticker] = "SPY"
+)
+
+SPY Cumulative Return =
+CALCULATE(
+    MAX(market_powerbi[CumulativeReturn]),
+    market_powerbi[Ticker] = "SPY"
+)
+
+Average Daily Volume =
+AVERAGE(market_powerbi[Volume])
+
+SPY Adjusted Close =
+CALCULATE(
+    MAX(market_powerbi[Adj Close]),
+    market_powerbi[Ticker] = "SPY"
+)
+
+SPY Rolling Volatility =
+CALCULATE(
+    MAX(market_powerbi[RollingVol20]),
+    market_powerbi[Ticker] = "SPY"
+)
+
+TABLE: market_kpi_summary
+
+Average Total Return =
+AVERAGE(market_kpi_summary[TotalReturn])
+
+Average Annualised Return =
+AVERAGE(market_kpi_summary[AnnualizedReturn])
+
+Average Annualised Volatility =
+AVERAGE(market_kpi_summary[AnnualizedVolatility])
+
+Average Maximum Drawdown =
+AVERAGE(market_kpi_summary[MaximumDrawdown])
+
+Average Sharpe Style Ratio =
+AVERAGE(market_kpi_summary[SharpeStyleRatio_0pctRF])
+
+SPY Total Return =
+CALCULATE(
+    MAX(market_kpi_summary[TotalReturn]),
+    market_kpi_summary[Ticker] = "SPY"
+)
+
+Ticker Total Return =
+MAX(market_kpi_summary[TotalReturn])
+
+Ticker Annualised Return =
+MAX(market_kpi_summary[AnnualizedReturn])
+
+Ticker Annualised Volatility =
+MAX(market_kpi_summary[AnnualizedVolatility])
+
+Ticker Maximum Drawdown =
+MAX(market_kpi_summary[MaximumDrawdown])
+
+Ticker Sharpe Style Ratio =
+MAX(market_kpi_summary[SharpeStyleRatio_0pctRF])
+
+TABLE: forecast_test_predictions
+
+Actual SPY Price =
+MAX(forecast_test_predictions[ActualAdjClose])
+
+Naive Forecast =
+CALCULATE(
+    MAX(forecast_test_predictions[PredictedAdjClose]),
+    forecast_test_predictions[Model] = "Naive Previous Close"
+)
+
+ARIMA Forecast =
+CALCULATE(
+    MAX(forecast_test_predictions[PredictedAdjClose]),
+    forecast_test_predictions[Model] = "ARIMA(5,1,0)"
+)
+
+TABLE: future_20day_forecast
+
+Future ARIMA Forecast =
+MAX(future_20day_forecast[ForecastAdjClose])
+
+TABLE: forecast_model_comparison
+
+Naive RMSE =
+CALCULATE(
+    MAX(forecast_model_comparison[RMSE]),
+    forecast_model_comparison[Model] = "Naive Previous Close"
+)
+
+ARIMA RMSE =
+CALCULATE(
+    MAX(forecast_model_comparison[RMSE]),
+    forecast_model_comparison[Model] = "ARIMA(5,1,0)"
+)
+
+Naive MAPE % =
+DIVIDE(
+    CALCULATE(
+        MAX(forecast_model_comparison[MAPE_Pct]),
+        forecast_model_comparison[Model] = "Naive Previous Close"
+    ),
+    100
+)
+
+ARIMA MAPE % =
+DIVIDE(
+    CALCULATE(
+        MAX(forecast_model_comparison[MAPE_Pct]),
+        forecast_model_comparison[Model] = "ARIMA(5,1,0)"
+    ),
+    100
+)
+
+FORMATTING
+==========
+Price measures: Currency ($), 2 decimals
+Return / volatility / drawdown measures: Percentage, 2 decimals
+MAPE measures: Percentage, 2 decimals
+Volume / record counts: Whole number
+Sharpe-style ratio: 2 decimals

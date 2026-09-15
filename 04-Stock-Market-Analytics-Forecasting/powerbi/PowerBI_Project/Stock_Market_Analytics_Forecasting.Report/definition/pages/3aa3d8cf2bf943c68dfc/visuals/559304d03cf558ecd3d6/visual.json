@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "559304d03cf558ecd3d6",
+  "position": {
+    "x": 650,
+    "y": 455,
+    "z": 5000,
+    "height": 220,
+    "width": 600,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_kpi_summary"
+                    }
+                  },
+                  "Property": "Ticker"
+                }
+              },
+              "queryRef": "market_kpi_summary.Ticker",
+              "nativeQueryRef": "Ticker",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_kpi_summary"
+                    }
+                  },
+                  "Property": "Ticker Sharpe Style Ratio"
+                }
+              },
+              "queryRef": "market_kpi_summary.Ticker Sharpe Style Ratio",
+              "nativeQueryRef": "Ticker Sharpe Style Ratio"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

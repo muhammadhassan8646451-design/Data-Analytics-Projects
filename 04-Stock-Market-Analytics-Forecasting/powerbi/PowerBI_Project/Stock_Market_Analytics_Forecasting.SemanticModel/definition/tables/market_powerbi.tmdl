@@ -1,0 +1,180 @@
+table market_powerbi
+
+	measure 'Trading Records' = COUNTROWS(market_powerbi)
+		formatString: #,0
+
+	measure 'Total Securities' = DISTINCTCOUNT(market_powerbi[Ticker])
+		formatString: #,0
+
+	measure 'SPY Latest Historical Price' = CALCULATE(MAX(market_powerbi[Adj Close]), market_powerbi[Ticker] = "SPY")
+		formatString: $#,0.00
+
+	measure 'SPY Cumulative Return' = CALCULATE(MAX(market_powerbi[CumulativeReturn]), market_powerbi[Ticker] = "SPY")
+		formatString: 0.00%
+
+	measure 'Average Daily Volume' = AVERAGE(market_powerbi[Volume])
+		formatString: #,0
+
+	measure 'SPY Adjusted Close' = CALCULATE(MAX(market_powerbi[Adj Close]), market_powerbi[Ticker] = "SPY")
+		formatString: $#,0.00
+
+	measure 'SPY Rolling Volatility' = CALCULATE(MAX(market_powerbi[RollingVol20]), market_powerbi[Ticker] = "SPY")
+		formatString: 0.00%
+
+	column Date
+		dataType: dateTime
+		formatString: Short Date
+		sourceColumn: Date
+		summarizeBy: none
+
+	column Ticker
+		dataType: string
+		sourceColumn: Ticker
+		summarizeBy: none
+
+	column Open
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: Open
+		summarizeBy: none
+
+	column High
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: High
+		summarizeBy: none
+
+	column Low
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: Low
+		summarizeBy: none
+
+	column Close
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: Close
+		summarizeBy: none
+
+	column 'Adj Close'
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: Adj Close
+		summarizeBy: none
+
+	column Volume
+		dataType: int64
+		formatString: #,0
+		sourceColumn: Volume
+		summarizeBy: none
+
+	column DailyReturn
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: DailyReturn
+		summarizeBy: none
+
+	column LogReturn
+		dataType: double
+		formatString: 0.0000
+		sourceColumn: LogReturn
+		summarizeBy: none
+
+	column CumulativeReturn
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: CumulativeReturn
+		summarizeBy: none
+
+	column MA20
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: MA20
+		summarizeBy: none
+
+	column MA50
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: MA50
+		summarizeBy: none
+
+	column RollingVol20
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: RollingVol20
+		summarizeBy: none
+
+	column RunningPeak
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: RunningPeak
+		summarizeBy: none
+
+	column Drawdown
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: Drawdown
+		summarizeBy: none
+
+	column VolumeChange
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: VolumeChange
+		summarizeBy: none
+
+	column Year
+		dataType: int64
+		formatString: 0
+		sourceColumn: Year
+		summarizeBy: none
+
+	column Month
+		dataType: string
+		sourceColumn: Month
+		summarizeBy: none
+
+	column MonthName
+		dataType: string
+		sourceColumn: MonthName
+		summarizeBy: none
+
+	column DayOfWeek
+		dataType: string
+		sourceColumn: DayOfWeek
+		summarizeBy: none
+
+	partition market_powerbi = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/muhammadhassan8646451-design/Data-Analytics-Projects/main/04-Stock-Market-Analytics-Forecasting/powerbi/market_powerbi.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(
+						Headers,
+						{
+							{"Date", type date},
+							{"Ticker", type text},
+							{"Open", type number},
+							{"High", type number},
+							{"Low", type number},
+							{"Close", type number},
+							{"Adj Close", type number},
+							{"Volume", Int64.Type},
+							{"DailyReturn", type number},
+							{"LogReturn", type number},
+							{"CumulativeReturn", type number},
+							{"MA20", type number},
+							{"MA50", type number},
+							{"RollingVol20", type number},
+							{"RunningPeak", type number},
+							{"Drawdown", type number},
+							{"VolumeChange", type number},
+							{"Year", Int64.Type},
+							{"Month", type text},
+							{"MonthName", type text},
+							{"DayOfWeek", type text}
+						},
+						"en-US"
+					)
+				in
+					Typed

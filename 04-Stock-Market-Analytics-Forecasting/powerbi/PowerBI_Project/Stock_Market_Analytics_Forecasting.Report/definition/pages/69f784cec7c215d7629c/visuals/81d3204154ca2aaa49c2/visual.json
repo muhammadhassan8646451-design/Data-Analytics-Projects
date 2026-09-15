@@ -1,0 +1,79 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "81d3204154ca2aaa49c2",
+  "position": {
+    "x": 30,
+    "y": 30,
+    "z": 1000,
+    "height": 145,
+    "width": 1220,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_model_comparison"
+                    }
+                  },
+                  "Property": "Naive RMSE"
+                }
+              },
+              "queryRef": "forecast_model_comparison.Naive RMSE",
+              "nativeQueryRef": "Naive RMSE"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_model_comparison"
+                    }
+                  },
+                  "Property": "ARIMA RMSE"
+                }
+              },
+              "queryRef": "forecast_model_comparison.ARIMA RMSE",
+              "nativeQueryRef": "ARIMA RMSE"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_model_comparison"
+                    }
+                  },
+                  "Property": "Naive MAPE %"
+                }
+              },
+              "queryRef": "forecast_model_comparison.Naive MAPE %",
+              "nativeQueryRef": "Naive MAPE %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_model_comparison"
+                    }
+                  },
+                  "Property": "ARIMA MAPE %"
+                }
+              },
+              "queryRef": "forecast_model_comparison.ARIMA MAPE %",
+              "nativeQueryRef": "ARIMA MAPE %"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

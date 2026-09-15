@@ -1,0 +1,93 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "1b6f9d59b75e18a41eb5",
+  "position": {
+    "x": 30,
+    "y": 30,
+    "z": 1000,
+    "height": 145,
+    "width": 1220,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_kpi_summary"
+                    }
+                  },
+                  "Property": "Average Total Return"
+                }
+              },
+              "queryRef": "market_kpi_summary.Average Total Return",
+              "nativeQueryRef": "Average Total Return"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_kpi_summary"
+                    }
+                  },
+                  "Property": "Average Annualised Return"
+                }
+              },
+              "queryRef": "market_kpi_summary.Average Annualised Return",
+              "nativeQueryRef": "Average Annualised Return"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_kpi_summary"
+                    }
+                  },
+                  "Property": "Average Annualised Volatility"
+                }
+              },
+              "queryRef": "market_kpi_summary.Average Annualised Volatility",
+              "nativeQueryRef": "Average Annualised Volatility"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_kpi_summary"
+                    }
+                  },
+                  "Property": "Average Maximum Drawdown"
+                }
+              },
+              "queryRef": "market_kpi_summary.Average Maximum Drawdown",
+              "nativeQueryRef": "Average Maximum Drawdown"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_kpi_summary"
+                    }
+                  },
+                  "Property": "Average Sharpe Style Ratio"
+                }
+              },
+              "queryRef": "market_kpi_summary.Average Sharpe Style Ratio",
+              "nativeQueryRef": "Average Sharpe Style Ratio"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

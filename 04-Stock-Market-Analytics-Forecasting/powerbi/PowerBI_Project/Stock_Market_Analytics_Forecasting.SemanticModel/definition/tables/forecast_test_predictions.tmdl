@@ -1,0 +1,64 @@
+table forecast_test_predictions
+
+	measure 'Actual SPY Price' = MAX(forecast_test_predictions[ActualAdjClose])
+		formatString: $#,0.00
+
+	measure 'Naive Forecast' = CALCULATE(MAX(forecast_test_predictions[PredictedAdjClose]), forecast_test_predictions[Model] = "Naive Previous Close")
+		formatString: $#,0.00
+
+	measure 'ARIMA Forecast' = CALCULATE(MAX(forecast_test_predictions[PredictedAdjClose]), forecast_test_predictions[Model] = "ARIMA(5,1,0)")
+		formatString: $#,0.00
+
+	column Date
+		dataType: dateTime
+		formatString: Short Date
+		sourceColumn: Date
+		summarizeBy: none
+
+	column Ticker
+		dataType: string
+		sourceColumn: Ticker
+		summarizeBy: none
+
+	column ActualAdjClose
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: ActualAdjClose
+		summarizeBy: none
+
+	column Model
+		dataType: string
+		sourceColumn: Model
+		summarizeBy: none
+
+	column PredictedAdjClose
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: PredictedAdjClose
+		summarizeBy: none
+
+	column RecordType
+		dataType: string
+		sourceColumn: RecordType
+		summarizeBy: none
+
+	partition forecast_test_predictions = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/muhammadhassan8646451-design/Data-Analytics-Projects/main/04-Stock-Market-Analytics-Forecasting/powerbi/forecast_test_predictions.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(
+						Headers,
+						{
+							{"Date", type date},
+							{"Ticker", type text},
+							{"ActualAdjClose", type number},
+							{"Model", type text},
+							{"PredictedAdjClose", type number},
+							{"RecordType", type text}
+						},
+						"en-US"
+					)
+				in
+					Typed

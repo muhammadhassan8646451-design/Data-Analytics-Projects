@@ -1,0 +1,149 @@
+table market_kpi_summary
+
+	measure 'Ticker Average Daily Volume' = MAX(market_kpi_summary[AverageDailyVolume])
+		formatString: #,0
+
+	measure 'Average Total Return' = AVERAGE(market_kpi_summary[TotalReturn])
+		formatString: 0.00%
+
+	measure 'Average Annualised Return' = AVERAGE(market_kpi_summary[AnnualizedReturn])
+		formatString: 0.00%
+
+	measure 'Average Annualised Volatility' = AVERAGE(market_kpi_summary[AnnualizedVolatility])
+		formatString: 0.00%
+
+	measure 'Average Maximum Drawdown' = AVERAGE(market_kpi_summary[MaximumDrawdown])
+		formatString: 0.00%
+
+	measure 'Average Sharpe Style Ratio' = AVERAGE(market_kpi_summary[SharpeStyleRatio_0pctRF])
+		formatString: 0.00
+
+	measure 'SPY Total Return' = CALCULATE(MAX(market_kpi_summary[TotalReturn]), market_kpi_summary[Ticker] = "SPY")
+		formatString: 0.00%
+
+	measure 'Ticker Total Return' = MAX(market_kpi_summary[TotalReturn])
+		formatString: 0.00%
+
+	measure 'Ticker Annualised Return' = MAX(market_kpi_summary[AnnualizedReturn])
+		formatString: 0.00%
+
+	measure 'Ticker Annualised Volatility' = MAX(market_kpi_summary[AnnualizedVolatility])
+		formatString: 0.00%
+
+	measure 'Ticker Maximum Drawdown' = MAX(market_kpi_summary[MaximumDrawdown])
+		formatString: 0.00%
+
+	measure 'Ticker Sharpe Style Ratio' = MAX(market_kpi_summary[SharpeStyleRatio_0pctRF])
+		formatString: 0.00
+
+	column Ticker
+		dataType: string
+		sourceColumn: Ticker
+		summarizeBy: none
+
+	column StartDate
+		dataType: dateTime
+		formatString: Short Date
+		sourceColumn: StartDate
+		summarizeBy: none
+
+	column EndDate
+		dataType: dateTime
+		formatString: Short Date
+		sourceColumn: EndDate
+		summarizeBy: none
+
+	column StartAdjClose
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: StartAdjClose
+		summarizeBy: none
+
+	column EndAdjClose
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: EndAdjClose
+		summarizeBy: none
+
+	column TotalReturn
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: TotalReturn
+		summarizeBy: none
+
+	column AnnualizedReturn
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: AnnualizedReturn
+		summarizeBy: none
+
+	column AnnualizedVolatility
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: AnnualizedVolatility
+		summarizeBy: none
+
+	column MaximumDrawdown
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: MaximumDrawdown
+		summarizeBy: none
+
+	column AverageDailyVolume
+		dataType: double
+		formatString: #,0
+		sourceColumn: AverageDailyVolume
+		summarizeBy: none
+
+	column BestDailyReturn
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: BestDailyReturn
+		summarizeBy: none
+
+	column WorstDailyReturn
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: WorstDailyReturn
+		summarizeBy: none
+
+	column PositiveDayPct
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: PositiveDayPct
+		summarizeBy: none
+
+	column SharpeStyleRatio_0pctRF
+		dataType: double
+		formatString: 0.00
+		sourceColumn: SharpeStyleRatio_0pctRF
+		summarizeBy: none
+
+	partition market_kpi_summary = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/muhammadhassan8646451-design/Data-Analytics-Projects/main/04-Stock-Market-Analytics-Forecasting/powerbi/market_kpi_summary.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(
+						Headers,
+						{
+							{"Ticker", type text},
+							{"StartDate", type date},
+							{"EndDate", type date},
+							{"StartAdjClose", type number},
+							{"EndAdjClose", type number},
+							{"TotalReturn", type number},
+							{"AnnualizedReturn", type number},
+							{"AnnualizedVolatility", type number},
+							{"MaximumDrawdown", type number},
+							{"AverageDailyVolume", type number},
+							{"BestDailyReturn", type number},
+							{"WorstDailyReturn", type number},
+							{"PositiveDayPct", type number},
+							{"SharpeStyleRatio_0pctRF", type number}
+						},
+						"en-US"
+					)
+				in
+					Typed

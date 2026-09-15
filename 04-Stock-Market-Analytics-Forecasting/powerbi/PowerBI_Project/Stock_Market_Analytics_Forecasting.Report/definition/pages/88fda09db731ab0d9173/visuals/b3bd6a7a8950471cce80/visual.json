@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "b3bd6a7a8950471cce80",
+  "position": {
+    "x": 650,
+    "y": 205,
+    "z": 3000,
+    "height": 220,
+    "width": 600,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "yearly_performance"
+                    }
+                  },
+                  "Property": "Year"
+                }
+              },
+              "queryRef": "yearly_performance.Year",
+              "nativeQueryRef": "Year",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "yearly_performance"
+                    }
+                  },
+                  "Property": "Average Yearly Return"
+                }
+              },
+              "queryRef": "yearly_performance.Average Yearly Return",
+              "nativeQueryRef": "Average Yearly Return"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+table yearly_performance
+
+	measure 'Average Yearly Return' = AVERAGE(yearly_performance[YearlyReturn])
+		formatString: 0.00%
+
+	measure 'Ticker Yearly Return' = MAX(yearly_performance[YearlyReturn])
+		formatString: 0.00%
+
+	column Ticker
+		dataType: string
+		sourceColumn: Ticker
+		summarizeBy: none
+
+	column Year
+		dataType: int64
+		formatString: 0
+		sourceColumn: Year
+		summarizeBy: none
+
+	column YearlyReturn
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: YearlyReturn
+		summarizeBy: none
+
+	column AverageVolume
+		dataType: double
+		formatString: #,0
+		sourceColumn: AverageVolume
+		summarizeBy: none
+
+	column AnnualizedVolatility
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: AnnualizedVolatility
+		summarizeBy: none
+
+	partition yearly_performance = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/muhammadhassan8646451-design/Data-Analytics-Projects/main/04-Stock-Market-Analytics-Forecasting/powerbi/yearly_performance.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(
+						Headers,
+						{
+							{"Ticker", type text},
+							{"Year", Int64.Type},
+							{"YearlyReturn", type number},
+							{"AverageVolume", type number},
+							{"AnnualizedVolatility", type number}
+						},
+						"en-US"
+					)
+				in
+					Typed

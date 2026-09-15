@@ -1,0 +1,107 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "19bc56815fdaaa3e69f6",
+  "position": {
+    "x": 30,
+    "y": 30,
+    "z": 1000,
+    "height": 145,
+    "width": 1220,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_powerbi"
+                    }
+                  },
+                  "Property": "Total Securities"
+                }
+              },
+              "queryRef": "market_powerbi.Total Securities",
+              "nativeQueryRef": "Total Securities"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_powerbi"
+                    }
+                  },
+                  "Property": "Trading Records"
+                }
+              },
+              "queryRef": "market_powerbi.Trading Records",
+              "nativeQueryRef": "Trading Records"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_powerbi"
+                    }
+                  },
+                  "Property": "SPY Latest Historical Price"
+                }
+              },
+              "queryRef": "market_powerbi.SPY Latest Historical Price",
+              "nativeQueryRef": "SPY Latest Historical Price"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_powerbi"
+                    }
+                  },
+                  "Property": "SPY Cumulative Return"
+                }
+              },
+              "queryRef": "market_powerbi.SPY Cumulative Return",
+              "nativeQueryRef": "SPY Cumulative Return"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_powerbi"
+                    }
+                  },
+                  "Property": "Average Daily Volume"
+                }
+              },
+              "queryRef": "market_kpi_summary.Ticker Average Daily Volume",
+              "nativeQueryRef": "Average Daily Volume"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "market_kpi_summary"
+                    }
+                  },
+                  "Property": "SPY Total Return"
+                }
+              },
+              "queryRef": "market_kpi_summary.SPY Total Return",
+              "nativeQueryRef": "SPY Total Return"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

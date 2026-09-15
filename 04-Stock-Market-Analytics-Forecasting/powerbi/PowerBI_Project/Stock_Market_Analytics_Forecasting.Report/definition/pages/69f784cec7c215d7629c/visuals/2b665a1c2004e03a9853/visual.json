@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "2b665a1c2004e03a9853",
+  "position": {
+    "x": 650,
+    "y": 485,
+    "z": 4000,
+    "height": 190,
+    "width": 600,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_model_comparison"
+                    }
+                  },
+                  "Property": "Model"
+                }
+              },
+              "queryRef": "forecast_model_comparison.Model",
+              "nativeQueryRef": "Model",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_model_comparison"
+                    }
+                  },
+                  "Property": "RMSE"
+                }
+              },
+              "queryRef": "forecast_model_comparison.RMSE",
+              "nativeQueryRef": "RMSE"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

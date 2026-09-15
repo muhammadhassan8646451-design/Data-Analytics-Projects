@@ -1,0 +1,12 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	discourageImplicitMeasures
+
+ref table market_powerbi
+ref table market_kpi_summary
+ref table yearly_performance
+ref table forecast_test_predictions
+ref table future_20day_forecast
+ref table forecast_model_comparison
