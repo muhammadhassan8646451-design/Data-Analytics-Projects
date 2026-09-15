@@ -1,0 +1,286 @@
+table superstore_powerbi
+
+	measure 'Total Sales' = SUM(superstore_powerbi[sales])
+		formatString: $#,0.00;($#,0.00);$#,0.00
+
+	measure 'Total Profit' = SUM(superstore_powerbi[profit])
+		formatString: $#,0.00;($#,0.00);$#,0.00
+
+	measure 'Profit Margin %' = DIVIDE([Total Profit], [Total Sales], 0)
+		formatString: 0.00%
+
+	measure 'Total Orders' = DISTINCTCOUNT(superstore_powerbi[order_id])
+		formatString: #,0
+
+	measure 'Total Customers' = DISTINCTCOUNT(superstore_powerbi[customer_id])
+		formatString: #,0
+
+	measure 'Average Order Value' = DIVIDE([Total Sales], [Total Orders], 0)
+		formatString: $#,0.00;($#,0.00);$#,0.00
+
+	measure 'Total Quantity' = SUM(superstore_powerbi[quantity])
+		formatString: #,0
+
+	measure 'Average Discount %' = AVERAGE(superstore_powerbi[discount])
+		formatString: 0.00%
+
+	measure 'Average Shipping Days' = AVERAGE(superstore_powerbi[shipping_days])
+		formatString: 0.0
+
+	measure 'Loss-Making Transactions' = CALCULATE(COUNTROWS(superstore_powerbi), superstore_powerbi[profit] < 0)
+		formatString: #,0
+
+	measure 'Profitable Transactions' = CALCULATE(COUNTROWS(superstore_powerbi), superstore_powerbi[profit] > 0)
+		formatString: #,0
+
+	column row_id
+		dataType: int64
+		sourceColumn: row_id
+		summarizeBy: none
+
+	column order_id
+		dataType: string
+		sourceColumn: order_id
+		summarizeBy: none
+
+	column order_date
+		dataType: dateTime
+		formatString: Short Date
+		sourceColumn: order_date
+		summarizeBy: none
+
+	column ship_date
+		dataType: dateTime
+		formatString: Short Date
+		sourceColumn: ship_date
+		summarizeBy: none
+
+	column ship_mode
+		dataType: string
+		sourceColumn: ship_mode
+		summarizeBy: none
+
+	column customer_id
+		dataType: string
+		sourceColumn: customer_id
+		summarizeBy: none
+
+	column customer_name
+		dataType: string
+		sourceColumn: customer_name
+		summarizeBy: none
+
+	column segment
+		dataType: string
+		sourceColumn: segment
+		summarizeBy: none
+
+	column country
+		dataType: string
+		sourceColumn: country
+		summarizeBy: none
+
+	column city
+		dataType: string
+		sourceColumn: city
+		summarizeBy: none
+
+	column state
+		dataType: string
+		sourceColumn: state
+		summarizeBy: none
+
+	column postal_code
+		dataType: int64
+		sourceColumn: postal_code
+		summarizeBy: none
+
+	column region
+		dataType: string
+		sourceColumn: region
+		summarizeBy: none
+
+	column product_id
+		dataType: string
+		sourceColumn: product_id
+		summarizeBy: none
+
+	column category
+		dataType: string
+		sourceColumn: category
+		summarizeBy: none
+
+	column sub_category
+		dataType: string
+		sourceColumn: sub_category
+		summarizeBy: none
+
+	column product_name
+		dataType: string
+		sourceColumn: product_name
+		summarizeBy: none
+
+	column sales
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: sales
+		summarizeBy: sum
+
+	column quantity
+		dataType: int64
+		formatString: #,0
+		sourceColumn: quantity
+		summarizeBy: sum
+
+	column discount
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: discount
+		summarizeBy: average
+
+	column profit
+		dataType: double
+		formatString: $#,0.00
+		sourceColumn: profit
+		summarizeBy: sum
+
+	column order_year
+		dataType: int64
+		formatString: 0
+		sourceColumn: order_year
+		summarizeBy: none
+
+	column order_quarter
+		dataType: string
+		sourceColumn: order_quarter
+		summarizeBy: none
+
+	column order_month
+		dataType: string
+		sourceColumn: order_month
+		summarizeBy: none
+
+	column shipping_days
+		dataType: int64
+		formatString: 0
+		sourceColumn: shipping_days
+		summarizeBy: average
+
+	column profit_margin_pct
+		dataType: double
+		formatString: 0.00
+		sourceColumn: profit_margin_pct
+		summarizeBy: average
+
+	column discount_band
+		dataType: string
+		sourceColumn: discount_band
+		summarizeBy: none
+
+	column profit_status
+		dataType: string
+		sourceColumn: profit_status
+		summarizeBy: none
+
+	partition superstore_powerbi = m
+		mode: import
+		source =
+				let
+					Primary = try Csv.Document(
+						Web.Contents("https://raw.githubusercontent.com/leonism/sample-superstore/master/data/superstore.csv"),
+						[Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]
+					) otherwise null,
+					Raw = if Primary <> null then Primary else Csv.Document(
+						Web.Contents("https://raw.githubusercontent.com/sumit0072/Superstore-Data-Analysis/main/Sample%20-%20Superstore.csv"),
+						[Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]
+					),
+					Headers = Table.PromoteHeaders(Raw, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(
+						Headers,
+						{
+							{"Row ID", Int64.Type},
+							{"Order ID", type text},
+							{"Order Date", type date},
+							{"Ship Date", type date},
+							{"Ship Mode", type text},
+							{"Customer ID", type text},
+							{"Customer Name", type text},
+							{"Segment", type text},
+							{"Country", type text},
+							{"City", type text},
+							{"State", type text},
+							{"Postal Code", Int64.Type},
+							{"Region", type text},
+							{"Product ID", type text},
+							{"Category", type text},
+							{"Sub-Category", type text},
+							{"Product Name", type text},
+							{"Sales", type number},
+							{"Quantity", Int64.Type},
+							{"Discount", type number},
+							{"Profit", type number}
+						},
+						"en-US"
+					),
+					Filtered = Table.SelectRows(
+						Typed,
+						each [Order ID] <> null
+							and [Customer ID] <> null
+							and [Product ID] <> null
+							and [Order Date] <> null
+							and [Ship Date] <> null
+							and [Sales] > 0
+							and [Quantity] > 0
+							and [Discount] >= 0
+							and [Discount] <= 1
+					),
+					Deduplicated = Table.Distinct(Filtered),
+					Renamed = Table.RenameColumns(
+						Deduplicated,
+						{
+							{"Row ID", "row_id"},
+							{"Order ID", "order_id"},
+							{"Order Date", "order_date"},
+							{"Ship Date", "ship_date"},
+							{"Ship Mode", "ship_mode"},
+							{"Customer ID", "customer_id"},
+							{"Customer Name", "customer_name"},
+							{"Segment", "segment"},
+							{"Country", "country"},
+							{"City", "city"},
+							{"State", "state"},
+							{"Postal Code", "postal_code"},
+							{"Region", "region"},
+							{"Product ID", "product_id"},
+							{"Category", "category"},
+							{"Sub-Category", "sub_category"},
+							{"Product Name", "product_name"},
+							{"Sales", "sales"},
+							{"Quantity", "quantity"},
+							{"Discount", "discount"},
+							{"Profit", "profit"}
+						}
+					),
+					AddYear = Table.AddColumn(Renamed, "order_year", each Date.Year([order_date]), Int64.Type),
+					AddQuarter = Table.AddColumn(AddYear, "order_quarter", each "Q" & Text.From(Date.QuarterOfYear([order_date])), type text),
+					AddMonth = Table.AddColumn(AddQuarter, "order_month", each Date.ToText([order_date], "yyyy-MM"), type text),
+					AddShippingDays = Table.AddColumn(AddMonth, "shipping_days", each Duration.Days([ship_date] - [order_date]), Int64.Type),
+					AddMargin = Table.AddColumn(AddShippingDays, "profit_margin_pct", each if [sales] = 0 then null else ([profit] / [sales]) * 100, type number),
+					AddDiscountBand = Table.AddColumn(
+						AddMargin,
+						"discount_band",
+						each if [discount] = 0 then "No Discount"
+							else if [discount] <= 0.10 then "Low (<=10%)"
+							else if [discount] <= 0.20 then "Medium (11-20%)"
+							else if [discount] <= 0.30 then "High (21-30%)"
+							else "Very High (>30%)",
+						type text
+					),
+					AddProfitStatus = Table.AddColumn(
+						AddDiscountBand,
+						"profit_status",
+						each if [profit] < 0 then "Loss" else "Profit",
+						type text
+					)
+				in
+					AddProfitStatus

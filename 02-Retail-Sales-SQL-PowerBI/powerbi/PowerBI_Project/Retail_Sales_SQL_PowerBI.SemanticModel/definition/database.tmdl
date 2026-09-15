@@ -1,0 +1,4 @@
+database Retail_Sales_SQL_PowerBI
+	compatibilityLevel: 1702
+	compatibilityMode: powerBI
+	language: 1033
