@@ -1,0 +1,39 @@
+table feature_importance
+
+	measure 'Permutation Importance' = MAX(feature_importance[ImportanceMean])
+		formatString: 0.0000
+
+	column Feature
+		dataType: string
+		sourceColumn: Feature
+		summarizeBy: none
+
+	column ImportanceMean
+		dataType: double
+		formatString: 0.0000
+		sourceColumn: ImportanceMean
+		summarizeBy: none
+
+	column ImportanceStd
+		dataType: double
+		formatString: 0.0000
+		sourceColumn: ImportanceStd
+		summarizeBy: none
+
+	partition feature_importance = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/muhammadhassan8646451-design/Data-Analytics-Projects/main/05-Credit-Risk-Explainable-ML/powerbi/feature_importance.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(
+						Headers,
+						{
+							{"Feature", type text},
+							{"ImportanceMean", type number},
+							{"ImportanceStd", type number}
+						},
+						"en-US"
+					)
+				in
+					Typed

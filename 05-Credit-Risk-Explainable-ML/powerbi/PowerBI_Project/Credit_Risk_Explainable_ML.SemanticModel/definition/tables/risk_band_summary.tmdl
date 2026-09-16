@@ -1,0 +1,69 @@
+table risk_band_summary
+
+	measure 'Band Clients' = SUM(risk_band_summary[Clients])
+		formatString: #,0
+
+	measure 'Band Average Predicted Risk' = MAX(risk_band_summary[AvgPredictedProbability])
+		formatString: 0.00%
+
+	measure 'Band Observed Default Rate' = MAX(risk_band_summary[ActualDefaultRate])
+		formatString: 0.00%
+
+	measure 'Band Credit Limit' = SUM(risk_band_summary[TotalCreditLimit])
+		formatString: #,0
+
+	column RiskBand
+		dataType: string
+		sourceColumn: RiskBand
+		summarizeBy: none
+
+	column Clients
+		dataType: int64
+		formatString: #,0
+		sourceColumn: Clients
+		summarizeBy: none
+
+	column AvgPredictedProbability
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: AvgPredictedProbability
+		summarizeBy: none
+
+	column ActualDefaultRate
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: ActualDefaultRate
+		summarizeBy: none
+
+	column TotalCreditLimit
+		dataType: double
+		formatString: #,0
+		sourceColumn: TotalCreditLimit
+		summarizeBy: none
+
+	column AvgCreditLimit
+		dataType: double
+		formatString: #,0
+		sourceColumn: AvgCreditLimit
+		summarizeBy: none
+
+	partition risk_band_summary = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/muhammadhassan8646451-design/Data-Analytics-Projects/main/05-Credit-Risk-Explainable-ML/powerbi/risk_band_summary.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(
+						Headers,
+						{
+							{"RiskBand", type text},
+							{"Clients", Int64.Type},
+							{"AvgPredictedProbability", type number},
+							{"ActualDefaultRate", type number},
+							{"TotalCreditLimit", type number},
+							{"AvgCreditLimit", type number}
+						},
+						"en-US"
+					)
+				in
+					Typed

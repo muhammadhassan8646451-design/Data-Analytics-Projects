@@ -1,0 +1,84 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "e011bf3ad521365e4a0b",
+  "position": {
+    "x": 650,
+    "y": 205,
+    "z": 3000,
+    "height": 220,
+    "width": 600,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_analysis"
+                    }
+                  },
+                  "Property": "Threshold"
+                }
+              },
+              "queryRef": "threshold_analysis.Threshold",
+              "nativeQueryRef": "Threshold",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_analysis"
+                    }
+                  },
+                  "Property": "Threshold Precision"
+                }
+              },
+              "queryRef": "threshold_analysis.Threshold Precision",
+              "nativeQueryRef": "Threshold Precision"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_analysis"
+                    }
+                  },
+                  "Property": "Threshold Recall"
+                }
+              },
+              "queryRef": "threshold_analysis.Threshold Recall",
+              "nativeQueryRef": "Threshold Recall"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "threshold_analysis"
+                    }
+                  },
+                  "Property": "Threshold F1"
+                }
+              },
+              "queryRef": "threshold_analysis.Threshold F1",
+              "nativeQueryRef": "Threshold F1"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+CREDIT RISK & EXPLAINABLE ML — BUSINESS FINDINGS
+=================================================
+Clients analysed: 29,965
+Observed defaults: 6,630
+Overall default rate: 22.13%
+
+Selected model by PR-AUC: Random Forest
+Accuracy: 0.776
+Precision: 0.494
+Recall: 0.593
+F1: 0.539
+ROC-AUC: 0.779
+PR-AUC: 0.560
+
+Best-F1 test threshold: 0.50
+High-risk clients: 8,113
+Observed default rate in High-risk band: 54.55%
+High-risk credit-limit exposure proxy: 939,663,680
+
+Top model features: PAY_0, SevereDelinquencyCount, MaxRepaymentDelay, RecentDelinquencyCount, AvgRepaymentStatus, RepaymentTrend, PaymentToBillRatio, LIMIT_BAL, BillUtilization, LatestUtilization
+
+Responsible-use notes:
+1. Educational portfolio analytics only.
+2. Sensitive demographic fields are excluded from predictive modelling.
+3. Accuracy alone is insufficient for an imbalanced target.
+4. PR-AUC, ROC-AUC, recall, precision and threshold trade-offs should be reviewed together.
+5. Feature importance describes model behaviour and does not establish causality.
+6. Real lending use would require calibration, fairness testing, governance, monitoring and human oversight.

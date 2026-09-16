@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "bf913e3791f697d3afb2",
+  "position": {
+    "x": 30,
+    "y": 205,
+    "z": 2000,
+    "height": 220,
+    "width": 590,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "risk_band_summary"
+                    }
+                  },
+                  "Property": "RiskBand"
+                }
+              },
+              "queryRef": "risk_band_summary.RiskBand",
+              "nativeQueryRef": "RiskBand",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "risk_band_summary"
+                    }
+                  },
+                  "Property": "Band Clients"
+                }
+              },
+              "queryRef": "risk_band_summary.Band Clients",
+              "nativeQueryRef": "Band Clients"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

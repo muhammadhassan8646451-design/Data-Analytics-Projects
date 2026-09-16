@@ -1,0 +1,84 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "b0a5ec783d8cca8a38ad",
+  "position": {
+    "x": 650,
+    "y": 455,
+    "z": 5000,
+    "height": 220,
+    "width": 600,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_comparison"
+                    }
+                  },
+                  "Property": "Model"
+                }
+              },
+              "queryRef": "model_comparison.Model",
+              "nativeQueryRef": "Model",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_comparison"
+                    }
+                  },
+                  "Property": "Model Recall"
+                }
+              },
+              "queryRef": "model_comparison.Model Recall",
+              "nativeQueryRef": "Model Recall"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_comparison"
+                    }
+                  },
+                  "Property": "Model Precision"
+                }
+              },
+              "queryRef": "model_comparison.Model Precision",
+              "nativeQueryRef": "Model Precision"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_comparison"
+                    }
+                  },
+                  "Property": "Model F1"
+                }
+              },
+              "queryRef": "model_comparison.Model F1",
+              "nativeQueryRef": "Model F1"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

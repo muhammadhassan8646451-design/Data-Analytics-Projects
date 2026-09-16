@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "8265bcbb7b6eeb9e9b22",
+  "position": {
+    "x": 650,
+    "y": 455,
+    "z": 5000,
+    "height": 220,
+    "width": 600,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_risk_powerbi"
+                    }
+                  },
+                  "Property": "DEFAULT"
+                }
+              },
+              "queryRef": "credit_risk_powerbi.DEFAULT",
+              "nativeQueryRef": "DEFAULT",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_risk_powerbi"
+                    }
+                  },
+                  "Property": "Risk Band Clients"
+                }
+              },
+              "queryRef": "credit_risk_powerbi.Risk Band Clients",
+              "nativeQueryRef": "Risk Band Clients"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

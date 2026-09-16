@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "f2f9ba7ebad9deb8a764",
+  "position": {
+    "x": 650,
+    "y": 455,
+    "z": 5000,
+    "height": 220,
+    "width": 600,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_risk_powerbi"
+                    }
+                  },
+                  "Property": "EducationLabel"
+                }
+              },
+              "queryRef": "credit_risk_powerbi.EducationLabel",
+              "nativeQueryRef": "EducationLabel",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_risk_powerbi"
+                    }
+                  },
+                  "Property": "Risk Band Default Rate"
+                }
+              },
+              "queryRef": "credit_risk_powerbi.Risk Band Default Rate",
+              "nativeQueryRef": "Risk Band Default Rate"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

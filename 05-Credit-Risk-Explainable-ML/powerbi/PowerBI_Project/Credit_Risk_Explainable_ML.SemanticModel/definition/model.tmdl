@@ -1,0 +1,11 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	discourageImplicitMeasures
+
+ref table credit_risk_powerbi
+ref table model_comparison
+ref table threshold_analysis
+ref table feature_importance
+ref table risk_band_summary

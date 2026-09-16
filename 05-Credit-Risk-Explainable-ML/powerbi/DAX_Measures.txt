@@ -1,0 +1,142 @@
+POWER BI DAX MEASURES
+======================
+
+TABLE: credit_risk_powerbi
+
+Total Clients =
+DISTINCTCOUNT(credit_risk_powerbi[CLIENT_ID])
+
+Observed Default Rate =
+AVERAGE(credit_risk_powerbi[DEFAULT])
+
+Total Credit Limit =
+SUM(credit_risk_powerbi[LIMIT_BAL])
+
+Average Credit Limit =
+AVERAGE(credit_risk_powerbi[LIMIT_BAL])
+
+Average Predicted Risk =
+AVERAGE(credit_risk_powerbi[PredictedDefaultProbability])
+
+High Risk Clients =
+CALCULATE(
+    DISTINCTCOUNT(credit_risk_powerbi[CLIENT_ID]),
+    credit_risk_powerbi[RiskBand] = "High"
+)
+
+High Risk Credit Limit =
+CALCULATE(
+    SUM(credit_risk_powerbi[LIMIT_BAL]),
+    credit_risk_powerbi[RiskBand] = "High"
+)
+
+Average Bill Utilisation =
+AVERAGE(credit_risk_powerbi[BillUtilization])
+
+Average Payment To Bill Ratio =
+AVERAGE(credit_risk_powerbi[PaymentToBillRatio])
+
+Average Recent Delinquency =
+AVERAGE(credit_risk_powerbi[RecentDelinquencyCount])
+
+Risk Band Clients =
+DISTINCTCOUNT(credit_risk_powerbi[CLIENT_ID])
+
+Risk Band Default Rate =
+AVERAGE(credit_risk_powerbi[DEFAULT])
+
+Risk Band Credit Limit =
+SUM(credit_risk_powerbi[LIMIT_BAL])
+
+TABLE: model_comparison
+
+Selected Model Accuracy =
+CALCULATE(
+    MAX(model_comparison[Accuracy]),
+    model_comparison[Model] = "Random Forest"
+)
+
+Selected Model Precision =
+CALCULATE(
+    MAX(model_comparison[Precision]),
+    model_comparison[Model] = "Random Forest"
+)
+
+Selected Model Recall =
+CALCULATE(
+    MAX(model_comparison[Recall]),
+    model_comparison[Model] = "Random Forest"
+)
+
+Selected Model F1 =
+CALCULATE(
+    MAX(model_comparison[F1]),
+    model_comparison[Model] = "Random Forest"
+)
+
+Selected Model ROC AUC =
+CALCULATE(
+    MAX(model_comparison[ROC_AUC]),
+    model_comparison[Model] = "Random Forest"
+)
+
+Selected Model PR AUC =
+CALCULATE(
+    MAX(model_comparison[PR_AUC]),
+    model_comparison[Model] = "Random Forest"
+)
+
+Model ROC AUC =
+MAX(model_comparison[ROC_AUC])
+
+Model PR AUC =
+MAX(model_comparison[PR_AUC])
+
+Model Recall =
+MAX(model_comparison[Recall])
+
+Model Precision =
+MAX(model_comparison[Precision])
+
+Model F1 =
+MAX(model_comparison[F1])
+
+TABLE: threshold_analysis
+
+Threshold Precision =
+MAX(threshold_analysis[Precision])
+
+Threshold Recall =
+MAX(threshold_analysis[Recall])
+
+Threshold F1 =
+MAX(threshold_analysis[F1])
+
+Threshold Predicted High Risk =
+MAX(threshold_analysis[PredictedHighRiskCount])
+
+TABLE: feature_importance
+
+Permutation Importance =
+MAX(feature_importance[ImportanceMean])
+
+TABLE: risk_band_summary
+
+Band Clients =
+SUM(risk_band_summary[Clients])
+
+Band Average Predicted Risk =
+MAX(risk_band_summary[AvgPredictedProbability])
+
+Band Observed Default Rate =
+MAX(risk_band_summary[ActualDefaultRate])
+
+Band Credit Limit =
+SUM(risk_band_summary[TotalCreditLimit])
+
+FORMATTING
+==========
+Default rates / probabilities / model scores: Percentage, 2 decimals
+Credit limit: Whole number with thousands separator
+Client counts: Whole number
+Feature importance: 4 decimals

@@ -1,0 +1,107 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "84a2b5a2850daf61d58f",
+  "position": {
+    "x": 30,
+    "y": 30,
+    "z": 1000,
+    "height": 145,
+    "width": 1220,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_comparison"
+                    }
+                  },
+                  "Property": "Selected Model Accuracy"
+                }
+              },
+              "queryRef": "model_comparison.Selected Model Accuracy",
+              "nativeQueryRef": "Selected Model Accuracy"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_comparison"
+                    }
+                  },
+                  "Property": "Selected Model Precision"
+                }
+              },
+              "queryRef": "model_comparison.Selected Model Precision",
+              "nativeQueryRef": "Selected Model Precision"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_comparison"
+                    }
+                  },
+                  "Property": "Selected Model Recall"
+                }
+              },
+              "queryRef": "model_comparison.Selected Model Recall",
+              "nativeQueryRef": "Selected Model Recall"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_comparison"
+                    }
+                  },
+                  "Property": "Selected Model F1"
+                }
+              },
+              "queryRef": "model_comparison.Selected Model F1",
+              "nativeQueryRef": "Selected Model F1"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_comparison"
+                    }
+                  },
+                  "Property": "Selected Model ROC AUC"
+                }
+              },
+              "queryRef": "model_comparison.Selected Model ROC AUC",
+              "nativeQueryRef": "Selected Model ROC AUC"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "model_comparison"
+                    }
+                  },
+                  "Property": "Selected Model PR AUC"
+                }
+              },
+              "queryRef": "model_comparison.Selected Model PR AUC",
+              "nativeQueryRef": "Selected Model PR AUC"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

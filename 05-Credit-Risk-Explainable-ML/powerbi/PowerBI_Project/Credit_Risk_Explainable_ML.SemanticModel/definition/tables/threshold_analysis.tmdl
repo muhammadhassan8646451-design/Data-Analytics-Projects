@@ -1,0 +1,63 @@
+table threshold_analysis
+
+	measure 'Threshold Precision' = MAX(threshold_analysis[Precision])
+		formatString: 0.00%
+
+	measure 'Threshold Recall' = MAX(threshold_analysis[Recall])
+		formatString: 0.00%
+
+	measure 'Threshold F1' = MAX(threshold_analysis[F1])
+		formatString: 0.00%
+
+	measure 'Threshold Predicted High Risk' = MAX(threshold_analysis[PredictedHighRiskCount])
+		formatString: #,0
+
+	column Threshold
+		dataType: double
+		formatString: 0.00
+		sourceColumn: Threshold
+		summarizeBy: none
+
+	column Precision
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: Precision
+		summarizeBy: none
+
+	column Recall
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: Recall
+		summarizeBy: none
+
+	column F1
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: F1
+		summarizeBy: none
+
+	column PredictedHighRiskCount
+		dataType: int64
+		formatString: #,0
+		sourceColumn: PredictedHighRiskCount
+		summarizeBy: none
+
+	partition threshold_analysis = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/muhammadhassan8646451-design/Data-Analytics-Projects/main/05-Credit-Risk-Explainable-ML/powerbi/threshold_analysis.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(
+						Headers,
+						{
+							{"Threshold", type number},
+							{"Precision", type number},
+							{"Recall", type number},
+							{"F1", type number},
+							{"PredictedHighRiskCount", Int64.Type}
+						},
+						"en-US"
+					)
+				in
+					Typed

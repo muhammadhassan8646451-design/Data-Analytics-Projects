@@ -1,0 +1,252 @@
+table credit_risk_powerbi
+
+	measure 'Total Clients' = DISTINCTCOUNT(credit_risk_powerbi[CLIENT_ID])
+		formatString: #,0
+
+	measure 'Observed Default Rate' = AVERAGE(credit_risk_powerbi[DEFAULT])
+		formatString: 0.00%
+
+	measure 'Total Credit Limit' = SUM(credit_risk_powerbi[LIMIT_BAL])
+		formatString: #,0
+
+	measure 'Average Credit Limit' = AVERAGE(credit_risk_powerbi[LIMIT_BAL])
+		formatString: #,0
+
+	measure 'Average Predicted Risk' = AVERAGE(credit_risk_powerbi[PredictedDefaultProbability])
+		formatString: 0.00%
+
+	measure 'High Risk Clients' = CALCULATE(DISTINCTCOUNT(credit_risk_powerbi[CLIENT_ID]), credit_risk_powerbi[RiskBand] = "High")
+		formatString: #,0
+
+	measure 'High Risk Credit Limit' = CALCULATE(SUM(credit_risk_powerbi[LIMIT_BAL]), credit_risk_powerbi[RiskBand] = "High")
+		formatString: #,0
+
+	measure 'Average Bill Utilisation' = AVERAGE(credit_risk_powerbi[BillUtilization])
+		formatString: 0.00%
+
+	measure 'Average Payment To Bill Ratio' = AVERAGE(credit_risk_powerbi[PaymentToBillRatio])
+		formatString: 0.00%
+
+	measure 'Average Recent Delinquency' = AVERAGE(credit_risk_powerbi[RecentDelinquencyCount])
+		formatString: 0.00
+
+	measure 'Risk Band Clients' = DISTINCTCOUNT(credit_risk_powerbi[CLIENT_ID])
+		formatString: #,0
+
+	measure 'Risk Band Default Rate' = AVERAGE(credit_risk_powerbi[DEFAULT])
+		formatString: 0.00%
+
+	measure 'Risk Band Credit Limit' = SUM(credit_risk_powerbi[LIMIT_BAL])
+		formatString: #,0
+
+	column CLIENT_ID
+		dataType: int64
+		formatString: 0
+		sourceColumn: CLIENT_ID
+		summarizeBy: none
+
+	column LIMIT_BAL
+		dataType: double
+		formatString: #,0
+		sourceColumn: LIMIT_BAL
+		summarizeBy: none
+
+	column LimitBand
+		dataType: string
+		sourceColumn: LimitBand
+		summarizeBy: none
+
+	column AGE
+		dataType: int64
+		formatString: 0
+		sourceColumn: AGE
+		summarizeBy: none
+
+	column AgeGroup
+		dataType: string
+		sourceColumn: AgeGroup
+		summarizeBy: none
+
+	column SexLabel
+		dataType: string
+		sourceColumn: SexLabel
+		summarizeBy: none
+
+	column EducationLabel
+		dataType: string
+		sourceColumn: EducationLabel
+		summarizeBy: none
+
+	column MarriageLabel
+		dataType: string
+		sourceColumn: MarriageLabel
+		summarizeBy: none
+
+	column PAY_0
+		dataType: int64
+		formatString: 0
+		sourceColumn: PAY_0
+		summarizeBy: none
+
+	column PAY_2
+		dataType: int64
+		formatString: 0
+		sourceColumn: PAY_2
+		summarizeBy: none
+
+	column PAY_3
+		dataType: int64
+		formatString: 0
+		sourceColumn: PAY_3
+		summarizeBy: none
+
+	column PAY_4
+		dataType: int64
+		formatString: 0
+		sourceColumn: PAY_4
+		summarizeBy: none
+
+	column PAY_5
+		dataType: int64
+		formatString: 0
+		sourceColumn: PAY_5
+		summarizeBy: none
+
+	column PAY_6
+		dataType: int64
+		formatString: 0
+		sourceColumn: PAY_6
+		summarizeBy: none
+
+	column AvgBillAmount
+		dataType: double
+		formatString: #,0.00
+		sourceColumn: AvgBillAmount
+		summarizeBy: none
+
+	column AvgPaymentAmount
+		dataType: double
+		formatString: #,0.00
+		sourceColumn: AvgPaymentAmount
+		summarizeBy: none
+
+	column RecentDelinquencyCount
+		dataType: int64
+		formatString: 0
+		sourceColumn: RecentDelinquencyCount
+		summarizeBy: none
+
+	column SevereDelinquencyCount
+		dataType: int64
+		formatString: 0
+		sourceColumn: SevereDelinquencyCount
+		summarizeBy: none
+
+	column MaxRepaymentDelay
+		dataType: int64
+		formatString: 0
+		sourceColumn: MaxRepaymentDelay
+		summarizeBy: none
+
+	column AvgRepaymentStatus
+		dataType: double
+		formatString: 0.00
+		sourceColumn: AvgRepaymentStatus
+		summarizeBy: none
+
+	column RepaymentTrend
+		dataType: double
+		formatString: 0.00
+		sourceColumn: RepaymentTrend
+		summarizeBy: none
+
+	column BillUtilization
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: BillUtilization
+		summarizeBy: none
+
+	column LatestUtilization
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: LatestUtilization
+		summarizeBy: none
+
+	column PaymentToBillRatio
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: PaymentToBillRatio
+		summarizeBy: none
+
+	column RecentPaymentToBillRatio
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: RecentPaymentToBillRatio
+		summarizeBy: none
+
+	column DEFAULT
+		dataType: int64
+		formatString: 0
+		sourceColumn: DEFAULT
+		summarizeBy: none
+
+	column PredictedDefaultProbability
+		dataType: double
+		formatString: 0.00%
+		sourceColumn: PredictedDefaultProbability
+		summarizeBy: none
+
+	column RiskBand
+		dataType: string
+		sourceColumn: RiskBand
+		summarizeBy: none
+
+	column BestF1ThresholdFlag
+		dataType: int64
+		formatString: 0
+		sourceColumn: BestF1ThresholdFlag
+		summarizeBy: none
+
+	partition credit_risk_powerbi = m
+		mode: import
+		source =
+				let
+					Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/muhammadhassan8646451-design/Data-Analytics-Projects/main/05-Credit-Risk-Explainable-ML/powerbi/credit_risk_powerbi.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+					Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					Typed = Table.TransformColumnTypes(
+						Headers,
+						{
+							{"CLIENT_ID", Int64.Type},
+							{"LIMIT_BAL", type number},
+							{"LimitBand", type text},
+							{"AGE", Int64.Type},
+							{"AgeGroup", type text},
+							{"SexLabel", type text},
+							{"EducationLabel", type text},
+							{"MarriageLabel", type text},
+							{"PAY_0", Int64.Type},
+							{"PAY_2", Int64.Type},
+							{"PAY_3", Int64.Type},
+							{"PAY_4", Int64.Type},
+							{"PAY_5", Int64.Type},
+							{"PAY_6", Int64.Type},
+							{"AvgBillAmount", type number},
+							{"AvgPaymentAmount", type number},
+							{"RecentDelinquencyCount", Int64.Type},
+							{"SevereDelinquencyCount", Int64.Type},
+							{"MaxRepaymentDelay", Int64.Type},
+							{"AvgRepaymentStatus", type number},
+							{"RepaymentTrend", type number},
+							{"BillUtilization", type number},
+							{"LatestUtilization", type number},
+							{"PaymentToBillRatio", type number},
+							{"RecentPaymentToBillRatio", type number},
+							{"DEFAULT", Int64.Type},
+							{"PredictedDefaultProbability", type number},
+							{"RiskBand", type text},
+							{"BestF1ThresholdFlag", Int64.Type}
+						},
+						"en-US"
+					)
+				in
+					Typed

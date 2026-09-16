@@ -1,0 +1,93 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "6ad581d0dc55980b8009",
+  "position": {
+    "x": 30,
+    "y": 30,
+    "z": 1000,
+    "height": 145,
+    "width": 1220,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_risk_powerbi"
+                    }
+                  },
+                  "Property": "Observed Default Rate"
+                }
+              },
+              "queryRef": "credit_risk_powerbi.Observed Default Rate",
+              "nativeQueryRef": "Observed Default Rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_risk_powerbi"
+                    }
+                  },
+                  "Property": "Average Predicted Risk"
+                }
+              },
+              "queryRef": "credit_risk_powerbi.Average Predicted Risk",
+              "nativeQueryRef": "Average Predicted Risk"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_risk_powerbi"
+                    }
+                  },
+                  "Property": "Average Bill Utilisation"
+                }
+              },
+              "queryRef": "credit_risk_powerbi.Average Bill Utilisation",
+              "nativeQueryRef": "Average Bill Utilisation"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_risk_powerbi"
+                    }
+                  },
+                  "Property": "Average Payment To Bill Ratio"
+                }
+              },
+              "queryRef": "credit_risk_powerbi.Average Payment To Bill Ratio",
+              "nativeQueryRef": "Average Payment To Bill Ratio"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_risk_powerbi"
+                    }
+                  },
+                  "Property": "Average Recent Delinquency"
+                }
+              },
+              "queryRef": "credit_risk_powerbi.Average Recent Delinquency",
+              "nativeQueryRef": "Average Recent Delinquency"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

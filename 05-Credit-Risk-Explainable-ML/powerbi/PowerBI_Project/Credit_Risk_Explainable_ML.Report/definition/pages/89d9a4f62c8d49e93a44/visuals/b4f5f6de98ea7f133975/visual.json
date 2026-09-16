@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "b4f5f6de98ea7f133975",
+  "position": {
+    "x": 30,
+    "y": 455,
+    "z": 4000,
+    "height": 220,
+    "width": 590,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "feature_importance"
+                    }
+                  },
+                  "Property": "Feature"
+                }
+              },
+              "queryRef": "feature_importance.Feature",
+              "nativeQueryRef": "Feature",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "feature_importance"
+                    }
+                  },
+                  "Property": "Permutation Importance"
+                }
+              },
+              "queryRef": "feature_importance.Permutation Importance",
+              "nativeQueryRef": "Permutation Importance"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

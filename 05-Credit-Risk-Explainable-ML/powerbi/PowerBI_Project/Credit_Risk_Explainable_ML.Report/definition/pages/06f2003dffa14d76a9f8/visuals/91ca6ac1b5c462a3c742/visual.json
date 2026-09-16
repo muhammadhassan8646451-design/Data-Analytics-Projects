@@ -1,0 +1,79 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "91ca6ac1b5c462a3c742",
+  "position": {
+    "x": 30,
+    "y": 30,
+    "z": 1000,
+    "height": 145,
+    "width": 1220,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_risk_powerbi"
+                    }
+                  },
+                  "Property": "High Risk Clients"
+                }
+              },
+              "queryRef": "credit_risk_powerbi.High Risk Clients",
+              "nativeQueryRef": "High Risk Clients"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_risk_powerbi"
+                    }
+                  },
+                  "Property": "High Risk Credit Limit"
+                }
+              },
+              "queryRef": "credit_risk_powerbi.High Risk Credit Limit",
+              "nativeQueryRef": "High Risk Credit Limit"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_risk_powerbi"
+                    }
+                  },
+                  "Property": "Average Predicted Risk"
+                }
+              },
+              "queryRef": "credit_risk_powerbi.Average Predicted Risk",
+              "nativeQueryRef": "Average Predicted Risk"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_risk_powerbi"
+                    }
+                  },
+                  "Property": "Observed Default Rate"
+                }
+              },
+              "queryRef": "credit_risk_powerbi.Observed Default Rate",
+              "nativeQueryRef": "Observed Default Rate"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

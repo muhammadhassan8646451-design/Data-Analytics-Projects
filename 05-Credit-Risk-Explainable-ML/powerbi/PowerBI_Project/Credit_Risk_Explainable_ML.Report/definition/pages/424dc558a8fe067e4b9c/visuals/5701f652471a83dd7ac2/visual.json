@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "5701f652471a83dd7ac2",
+  "position": {
+    "x": 650,
+    "y": 205,
+    "z": 3000,
+    "height": 220,
+    "width": 600,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_risk_powerbi"
+                    }
+                  },
+                  "Property": "RecentDelinquencyCount"
+                }
+              },
+              "queryRef": "credit_risk_powerbi.RecentDelinquencyCount",
+              "nativeQueryRef": "RecentDelinquencyCount",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "credit_risk_powerbi"
+                    }
+                  },
+                  "Property": "Risk Band Default Rate"
+                }
+              },
+              "queryRef": "credit_risk_powerbi.Risk Band Default Rate",
+              "nativeQueryRef": "Risk Band Default Rate"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
